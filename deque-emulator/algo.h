@@ -5,26 +5,27 @@
 template<class T, class Comp>
 std::deque<T> Merge(const std::deque<T>& half1, const std::deque<T>& half2, const Comp& comparator) {
     std::deque<T> result;
-    size_t i = 0, j = 0;
+    auto it1 = half1.begin();
+    auto it2 = half2.begin();
     
-    while (i < half1.size() && j < half2.size()) {
-        if (comparator(half1[i], half2[j])) {
-            result.push_back(half1[i]);
-            ++i;
+    while (it1 != half1.end() && it2 != half2.end()) {
+        if (comparator(*it1, *it2)) {
+            result.push_back(*it1);
+            ++it1;
         } else {
-            result.push_back(half2[j]);
-            ++j;
+            result.push_back(*it2);
+            ++it2;
         }
     }
     
-    while (i < half1.size()) {
-        result.push_back(half1[i]);
-        ++i;
+    while (it1 != half1.end()) {
+        result.push_back(*it1);
+        ++it1;
     }
     
-    while (j < half2.size()) {
-        result.push_back(half2[j]);
-        ++j;
+    while (it2 != half2.end()) {
+        result.push_back(*it2);
+        ++it2;
     }
     
     return result;

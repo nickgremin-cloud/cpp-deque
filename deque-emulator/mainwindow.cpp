@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 #include <QMessageBox>
-#include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
@@ -11,6 +10,8 @@
 #include <random>
 #include <functional>
 #include "algo.h"
+
+static const int MAX_SIZE = 1000;
 
 static std::deque<std::string> tea {
     "Чай Лунцзин",
@@ -223,7 +224,7 @@ void MainWindow::on_btn_resize_clicked() {
     bool ok;
     int newSize = ui->txt_size->text().toInt(&ok);
     if (ok) {
-        newSize = std::min(newSize, 1000);
+        newSize = std::min(newSize, MAX_SIZE);
         vector_model_.items.resize(newSize);
         vector_model_.iterator = vector_model_.items.begin();
         ApplyModel();
